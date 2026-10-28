@@ -5,6 +5,10 @@ a {
   font-size: 16px;
 }
 
+button {
+  cursor: pointer;
+}
+
 li {
   list-style: none;
   font-weight: 500;
@@ -30,40 +34,85 @@ body {
   font-family: "Inter", sans-serif;
 }
 body nav {
+  border-bottom: 1px solid rgba(229, 231, 235, 0.431372549);
+}
+body nav .container {
   display: flex;
   position: sticky;
   top: 0;
   z-index: 2;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(229, 231, 235, 0.431372549);
+  padding: 0 50px;
 }
-body nav ul {
+@media (max-width: 800px) {
+  body nav .container ul,
+  body nav .container .logoes {
+    padding: 0 10px;
+  }
+  body nav .container ul li,
+  body nav .container ul .same,
+  body nav .container .logoes li,
+  body nav .container .logoes .same {
+    display: none;
+  }
+  body nav .container ul .full_hidden,
+  body nav .container .logoes .full_hidden {
+    display: block;
+  }
+}
+body nav .container ul {
   display: flex;
   align-items: center;
   gap: 20px;
   margin: 10px 0;
 }
-body nav ul h2 {
+body nav .container ul h2 {
   margin: 0px;
 }
-body nav ul h2 a {
+body nav .container ul h2 a {
   font-weight: 700;
   font-size: 1.25rem;
   line-height: 2.75rem;
 }
-body nav ul li a {
+body nav .container ul li a {
   font-size: 0.875rem;
 }
-body nav .logoes {
+body nav .container ul li a:hover {
+  text-decoration: solid;
+}
+body nav .container .logoes {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 36px;
 }
-body nav .logoes .hidden {
+body nav .container .logoes .menu {
   display: none;
 }
-body nav .logoes button {
+body nav .container .logoes div {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+}
+body nav .container .logoes svg,
+body nav .container .logoes .login {
+  cursor: pointer;
+}
+body nav .container .logoes .moon:hover, body nav .container .logoes .heart:hover, body nav .container .logoes .cart:hover, body nav .container .logoes .banch:hover, body nav .container .logoes .login:hover {
+  background-color: #1e293b;
+}
+body nav .container .logoes .login {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #1E293B;
+  border-radius: 5px;
+  padding: 5px;
+}
+body nav .container .logoes .login:hover {
+  background-color: #1E293B;
+}
+body nav .container .logoes button {
   width: 40px;
   height: 40px;
   display: flex;
@@ -76,15 +125,18 @@ body nav .logoes button {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-body nav .logoes button:hover {
-  background-color: #1e293b;
+body nav .container .logoes button:hover {
+  text-decoration: solid;
 }
-body nav .logoes button svg {
+body nav .container .logoes button svg {
   width: 20px;
   height: 20px;
   stroke: currentColor;
 }
-body nav .logoes a {
+body nav .container .logoes button svg:hover {
+  border-bottom: 10px solid white;
+}
+body nav .container .logoes a {
   height: 40px;
   display: flex;
   align-items: center;
@@ -96,7 +148,48 @@ body nav .logoes a {
   border-radius: 8px;
   text-decoration: none;
 }
-body nav .logoes a:hover {
+body .store {
+  padding: 2rem 0;
+}
+body .store h1 {
+  padding: 0 50px;
+  font-size: 2rem;
+  margin-bottom: 32px;
+}
+body .store .search {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+body .store .search .search_input {
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid #253247;
+  padding: 7px 12px;
+}
+body .store .search .search_input input {
+  width: 1250px;
+  padding: 10px 12px;
+  border: none;
+  outline: none;
+  display: flex;
+  background-color: transparent;
+  color: white;
+}
+body .store .search .filter button {
+  padding: 12px 15px;
+  border: 1px solid #1e293b;
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 14px;
+}
+body .store .search .filter button:hover {
   background-color: #1e293b;
 }
 

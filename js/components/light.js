@@ -1,26 +1,26 @@
 
-// const light = document.querySelector(`.light`);
-// const dark = document.querySelector(`.dark`);
-// const body = document.body;
-// const links = document.querySelectorAll('a');
-// const logoes = document.querySelectorAll('.inline-flex');
+// // const light = document.querySelector(`.light`);
+// // const dark = document.querySelector(`.dark`);
+// // const body = document.body;
+// // const links = document.querySelectorAll('a');
+// // const logoes = document.querySelectorAll('.inline-flex');
 
 
-// export function themeFunction(){
-//     dark.addEventListener("click",()=>{
-//     body.style.backgroundColor= "white";
-//     body.style.color= "black";
+// // export function themeFunction(){
+// //     dark.addEventListener("click",()=>{
+// //     body.style.backgroundColor= "white";
+// //     body.style.color= "black";
 
-//     links.forEach(link => {
-//         link.style.color = "black";
-//     });
+// //     links.forEach(link => {
+// //         link.style.color = "black";
+// //     });
 
-//     logoes.forEach(logo => {
-//         logo.style.color = "black";
-//     });
+// //     logoes.forEach(logo => {
+// //         logo.style.color = "black";
+// //     });
 
-// } )
-// }
+// // } )
+// // }
 
 
 
@@ -28,9 +28,10 @@ const lightBtn = document.querySelector('.light');
 const darkBtn = document.querySelector('.dark');
 const body = document.body;
 const links = document.querySelectorAll('a');
-const logoes = document.querySelectorAll('.inline-flex');
+const logoes = document.querySelectorAll('.background');
 
 export function themeFunction() {
+    
     function applyTheme(isLight) {
         if (isLight) {
             body.style.backgroundColor = "white";
@@ -38,10 +39,6 @@ export function themeFunction() {
 
             links.forEach(link => {
                 link.style.color = "black";
-            });
-
-            logoes.forEach(logo => {
-                logo.style.color = "black";
             });
 
             if (darkBtn) darkBtn.style.display = "none";
@@ -53,10 +50,8 @@ export function themeFunction() {
 
             links.forEach(link => {
                 link.style.color = "white";
-            });
 
-            logoes.forEach(logo => {
-                logo.style.color = "#f8fafc";
+
             });
 
             if (darkBtn) darkBtn.style.display = "flex";
@@ -64,6 +59,22 @@ export function themeFunction() {
             localStorage.setItem("theme", "dark");
         }
     }
+
+    logoes.forEach(logo => {
+        logo.addEventListener('mouseenter', () => {
+            const currentTheme = localStorage.getItem("theme");
+            if (currentTheme === "light") {
+                logo.style.backgroundColor = "#f1f5f993";
+            } else {
+                logo.style.backgroundColor = "rgba(255, 255, 255, 0.1)"; // или ваш цвет для темной темы
+            }
+        });
+
+        logo.addEventListener('mouseleave', () => {
+            logo.style.backgroundColor = "";
+            logo.style.color = "";
+        });
+    });
 
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "light") {
@@ -73,7 +84,8 @@ export function themeFunction() {
     }
 
     function toggleTheme() {
-        if (body.style.backgroundColor === "white") {
+        const currentTheme = localStorage.getItem("theme");
+        if (currentTheme === "light") {
             applyTheme(false);
         } else {
             applyTheme(true);
@@ -83,8 +95,10 @@ export function themeFunction() {
     if (darkBtn) {
         darkBtn.addEventListener("click", toggleTheme);
     }
-    
+
     if (lightBtn) {
         lightBtn.addEventListener("click", toggleTheme);
     }
 }
+
+
