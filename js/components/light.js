@@ -5,6 +5,8 @@ const body = document.body;
 const links = document.querySelectorAll('a');
 const logoes = document.querySelectorAll('.background');
 const footer = document.querySelector(".site-footer")
+const navigation = document.querySelectorAll(".navigations")
+const cont = document.querySelector(".continue")
 
 export function themeFunction() {
     
@@ -15,12 +17,13 @@ export function themeFunction() {
             footer.style.backgroundColor = "white";
             footer.style.color = "black";
 
-            body.style.border = "green";
-
-
             links.forEach(link => {
                 link.style.color = "black";
             });
+
+            navigation.forEach(color =>{
+                color.style.color = "black";    
+            })
 
             if (darkBtn) darkBtn.style.display = "none";
             if (lightBtn) lightBtn.style.display = "flex";
