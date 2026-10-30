@@ -1,0 +1,42 @@
+@use "../components/navbar";
+@use "../components/footer";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    font-family: "Inter", sans-serif;
+}
+
+body {
+
+    .fish_list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+        margin-top: 100px;
+
+        p {
+            font-size: 19px;
+            font-weight: 400;
+            color: rgb(148, 163, 184);
+        }
+
+        a {
+            button {
+                background-color: #3576DF;
+                border: none;
+                padding: 12px 16px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 20px;
+                color: rgb(15, 23, 42);
+
+                &:hover {
+                    background-color: #3576dff3;
+
+                }
+            }
+        }
+    }
+}
