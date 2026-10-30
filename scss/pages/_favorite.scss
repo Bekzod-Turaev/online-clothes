@@ -1,10 +1,4 @@
-@use "../components/navbar";
-@use "../components/footer";
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-* {
-    font-family: "Inter", sans-serif;
-}
 
 body {
 
@@ -14,6 +8,7 @@ body {
         align-items: center;
         gap: 25px;
         margin-top: 100px;
+        padding: 0px 0 80px;
 
         p {
             font-size: 19px;
@@ -40,3 +35,4 @@ body {
         }
     }
 }
+

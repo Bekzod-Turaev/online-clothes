@@ -1,34 +1,10 @@
 
-// // const light = document.querySelector(`.light`);
-// // const dark = document.querySelector(`.dark`);
-// // const body = document.body;
-// // const links = document.querySelectorAll('a');
-// // const logoes = document.querySelectorAll('.inline-flex');
-
-
-// // export function themeFunction(){
-// //     dark.addEventListener("click",()=>{
-// //     body.style.backgroundColor= "white";
-// //     body.style.color= "black";
-
-// //     links.forEach(link => {
-// //         link.style.color = "black";
-// //     });
-
-// //     logoes.forEach(logo => {
-// //         logo.style.color = "black";
-// //     });
-
-// // } )
-// // }
-
-
-
 const lightBtn = document.querySelector('.light');
 const darkBtn = document.querySelector('.dark');
 const body = document.body;
 const links = document.querySelectorAll('a');
 const logoes = document.querySelectorAll('.background');
+const footer = document.querySelector(".site-footer")
 
 export function themeFunction() {
     
@@ -36,6 +12,11 @@ export function themeFunction() {
         if (isLight) {
             body.style.backgroundColor = "white";
             body.style.color = "black";
+            footer.style.backgroundColor = "white";
+            footer.style.color = "black";
+
+            body.style.border = "green";
+
 
             links.forEach(link => {
                 link.style.color = "black";
@@ -47,11 +28,11 @@ export function themeFunction() {
         } else {
             body.style.backgroundColor = "#020817";
             body.style.color = "white";
+            footer.style.backgroundColor = "#020817";
+            footer.style.color = "white";
 
             links.forEach(link => {
                 link.style.color = "white";
-
-
             });
 
             if (darkBtn) darkBtn.style.display = "flex";
@@ -65,6 +46,7 @@ export function themeFunction() {
             const currentTheme = localStorage.getItem("theme");
             if (currentTheme === "light") {
                 logo.style.backgroundColor = "#f1f5f993";
+                logo.style.color = "#020817";
             } else {
                 logo.style.backgroundColor = "rgba(255, 255, 255, 0.1)"; // или ваш цвет для темной темы
             }
