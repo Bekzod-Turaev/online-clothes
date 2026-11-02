@@ -1,4 +1,5 @@
 import { getLiked, toggleLiked, clearLiked } from './wishlist.js';
+import { addToCart } from './cart.js';
 
 const wishlist = document.getElementById('wishlist');
 const emptyBlock = document.querySelector('.fish_list');
@@ -33,7 +34,7 @@ function render() {
 
             <div class="product-content">
                 <h3>${name}</h3>
-                <span>$${price}</span>
+                <span>$${Number(price).toFixed(2)}</span>
             </div>
 
             <div class="wishlist-actions">
@@ -60,6 +61,10 @@ function render() {
         card.querySelector('.remove-btn').addEventListener('click', () => {
             toggleLiked({ id, title: name, price, image });
             render();
+        });
+
+        card.querySelector('.add-to-cart-btn').addEventListener('click', () => {
+            addToCart({ id, title: name, price, image });
         });
 
         grid.appendChild(card);

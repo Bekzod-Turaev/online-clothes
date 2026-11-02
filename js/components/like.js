@@ -1,4 +1,5 @@
 import { isLiked, toggleLiked } from './wishlist.js';
+import { addToCart } from './cart.js';
 
 const productsContainer = document.getElementById('products-container');
 const noProductsSection = document.getElementById('no-products-section');
@@ -67,7 +68,7 @@ function renderProducts(products) {
             <div class="product-content">
                 <h3>${title}</h3>
                 <p>${shortDescription}</p>
-                <span>$${price}</span>
+                <span>$${Number(price).toFixed(2)}</span>
             </div>
 
             <button class="add-to-cart-btn">Add to Cart</button>
@@ -77,6 +78,15 @@ function renderProducts(products) {
         favBtn.addEventListener('click', () => {
             const nowLiked = toggleLiked({ id, title, price, image });
             favBtn.classList.toggle('active', nowLiked);
+        });
+
+        const cartBtn = card.querySelector('.add-to-cart-btn');
+        cartBtn.addEventListener('click', () => {
+            addToCart({ id, title, price, image });
+            cartBtn.textContent = 'Added ✓';
+            setTimeout(() => {
+                cartBtn.textContent = 'Add to Cart';
+            }, 1000);
         });
 
         productsContainer.appendChild(card);
