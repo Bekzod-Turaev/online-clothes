@@ -4,31 +4,23 @@ body {
     nav {
 
         border-bottom: 1px solid #e5e7eb6e;
-
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background-color: #020817;
         .container {
             display: flex;
-            position: sticky;
-            top: 0;
-            z-index: 2;
             justify-content: space-between;
             align-items: center;
             padding: 0 50px;
-            @media (max-width: 800px) {
 
-                ul,
-                .logoes {
-                    padding: 0 10px;
-
-                    li,
-                    .same {
-                        display: none;
-                    }
-
-                    .full_hidden {
-                        display: block;
+                @media (max-width:640px) {
+                    ul{
+                        li{
+                            display: none;
+                        }
                     }
                 }
-            }
 
             ul {
                 display: flex;
@@ -62,6 +54,13 @@ body {
                 align-items: center;
                 gap: 36px;
 
+                @media (max-width:640px) {
+                    display: flex;
+                    .notice{
+                        display: none;
+                    }
+                }
+
                 .menu{
                     display: none;
                 }
@@ -74,6 +73,33 @@ body {
 
                 .moon:hover, .heart:hover,.cart:hover,.banch:hover,.login:hover{
                     background-color: #1e293b;
+                }
+
+                a{
+                    position: relative;
+                    .heart{
+                         .like-count {
+                            display: none;
+                            position: absolute;
+                            top: -3px;
+                            right: -4px;
+                            min-width: 18px;
+                            height: 18px;
+                            padding: 1px 6px;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 9px;
+                            background: #2563EB;
+                            color: #fff;
+                            font-size: 11px;
+                            font-weight: 600;
+                            line-height: 1;
+
+                            &.visible {
+                                display: flex;
+                            }
+                        }
+                    }
                 }
 
                 .login{
@@ -120,15 +146,12 @@ body {
                 }
 
                 a {
-                    // height: 40px;
                     display: flex;
                     align-items: center;
                     gap: 8px;
-                    // padding: 0 16px;
 
                     color: #f8fafc;
                     background: transparent;
-                    // border: 1px solid #253247;
                     border-radius: 8px;
                     text-decoration: none;
                 }

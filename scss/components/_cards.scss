@@ -23,6 +23,11 @@ $border: rgba(148, 163, 184, 0.25);
 
 .products{
     margin: 0px 50px;
+    padding: 0 40px;
+}
+
+.container{
+    margin: 0 auto;
 }
 
 .product-card {
@@ -33,6 +38,8 @@ $border: rgba(148, 163, 184, 0.25);
     border-radius: 8px;
     overflow: hidden;
     background: transparent;
+    margin-bottom: 30px;
+
 }
 
 .product-image-container {
@@ -42,17 +49,24 @@ $border: rgba(148, 163, 184, 0.25);
     overflow: hidden;
 }
 
-.product-image {
+.product-image-container {
+    position: relative;
     width: 100%;
-    height: 90%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+
+    &:hover .product-image {
+        transform: scale(1.1);
+    }
+}
+
+.product-image {
+    width: 95%;
+    height: 95%;
     object-fit: cover;
     display: block;
-    overflow: hidden;
-    transition:  400ms;
-    &:hover{
-        width: 110%;
-        height: 100%;
-    }
+    transform-origin: center;
+    transition: transform 500ms ease;
 }
 
 .favorite-btn {

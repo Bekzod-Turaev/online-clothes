@@ -1,3 +1,5 @@
+import { isLiked, toggleLiked } from './wishlist.js';
+
 const productsContainer = document.getElementById('products-container');
 const noProductsSection = document.getElementById('no-products-section');
 
@@ -45,7 +47,7 @@ function renderProducts(products) {
     productsContainer.innerHTML = '';
 
     products.forEach(product => {
-        const { title, price, description, image } = product;
+        const { id, title, price, description, image } = product;
         const shortDescription = truncateWords(description, MAX_WORDS);
 
         const card = document.createElement('div');
@@ -53,7 +55,7 @@ function renderProducts(products) {
         card.innerHTML = `
             <div class="product-image-container">
                 <img src="${image}" alt="${title}" class="product-image">
-                <button class="favorite-btn" aria-label="Add to favorites">
+                <button class="favorite-btn ${isLiked(id) ? 'active' : ''}" aria-label="Add to favorites">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-heart">
@@ -73,11 +75,14 @@ function renderProducts(products) {
 
         const favBtn = card.querySelector('.favorite-btn');
         favBtn.addEventListener('click', () => {
-            favBtn.classList.toggle('active');
+            const nowLiked = toggleLiked({ id, title, price, image });
+            favBtn.classList.toggle('active', nowLiked);
         });
 
         productsContainer.appendChild(card);
     });
 }
 
-fetchProducts();
+if (productsContainer && noProductsSection) {
+    fetchProducts();
+}

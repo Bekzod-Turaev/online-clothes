@@ -1,5 +1,3 @@
-
-
 body {
 
     .fish_list {
@@ -8,7 +6,7 @@ body {
         align-items: center;
         gap: 25px;
         margin-top: 100px;
-        padding: 0px 0 80px;
+        padding: 0 0 80px;
 
         p {
             font-size: 19px;
@@ -29,10 +27,101 @@ body {
 
                 &:hover {
                     background-color: #3576dff3;
-
                 }
+            }
+        }
+    }
+
+    #wishlist {
+        box-sizing: border-box;
+        margin-top: 40px;
+        padding: 0 50px 80px;
+
+        .wishlist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+
+            h1 {
+                margin: 0;
+                font-size: 32px;
+                font-weight: 700;
+            }
+        }
+
+        #clear-wishlist {
+            padding: 12px 20px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            border-radius: 6px;
+            background: transparent;
+            color: inherit;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: rgba(148, 163, 184, 0.15);
+            }
+        }
+
+        .products-grid {
+            padding: 0;
+        }
+    }
+
+    .wishlist-card {
+        opacity: 0;
+        animation: wishlistIn 0.5s ease forwards;
+
+        .product-content {
+            padding: 20px 20px 12px;
+        }
+    }
+
+    .wishlist-actions {
+        display: flex;
+        gap: 10px;
+        padding: 0 20px 20px;
+
+        .add-to-cart-btn {
+            flex: 1;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .remove-btn {
+            flex: 0 0 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            border-radius: 6px;
+            background: transparent;
+            color: inherit;
+            cursor: pointer;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: rgba(239, 68, 68, 0.15);
+                color: #ef4444;
             }
         }
     }
 }
 
+@keyframes wishlistIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

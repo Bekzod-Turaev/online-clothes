@@ -4,86 +4,57 @@ const darkBtn = document.querySelector('.dark');
 const body = document.body;
 const links = document.querySelectorAll('a');
 const logoes = document.querySelectorAll('.background');
-const footer = document.querySelector(".site-footer")
-const navigation = document.querySelectorAll(".navigations")
-const cont = document.querySelector(".continue")
+const footer = document.querySelector('.site-footer');
+const navbar = document.querySelector('nav');
+const filterBtn = document.querySelector('.filter button');
+const searchInput = document.querySelector('.search_input input');
 
 export function themeFunction() {
-    
+    function paint(element, background, color) {
+        if (!element) return;
+        element.style.backgroundColor = background;
+        element.style.color = color;
+    }
+
     function applyTheme(isLight) {
-        if (isLight) {
-            body.style.backgroundColor = "white";
-            body.style.color = "black";
-            footer.style.backgroundColor = "white";
-            footer.style.color = "black";
+        const bg = isLight ? 'white' : '#020817';
+        const footerBg = isLight ? 'white' : '#0D1526';
+        const text = isLight ? 'black' : 'white';
 
-            links.forEach(link => {
-                link.style.color = "black";
-            });
+        paint(body, bg, text);
+        paint(navbar, bg, text);
+        paint(footer, footerBg, text);
 
-            navigation.forEach(color =>{
-                color.style.color = "black";    
-            })
+        if (filterBtn) filterBtn.style.color = text;
+        if (searchInput) searchInput.style.color = text;
 
-            if (darkBtn) darkBtn.style.display = "none";
-            if (lightBtn) lightBtn.style.display = "flex";
-            localStorage.setItem("theme", "light");
-        } else {
-            body.style.backgroundColor = "#020817";
-            body.style.color = "white";
-            footer.style.backgroundColor = "#020817";
-            footer.style.color = "white";
+        links.forEach(link => {
+            link.style.color = text;
+        });
 
-            links.forEach(link => {
-                link.style.color = "white";
-            });
+        if (darkBtn) darkBtn.style.display = isLight ? 'none' : 'flex';
+        if (lightBtn) lightBtn.style.display = isLight ? 'flex' : 'none';
 
-            if (darkBtn) darkBtn.style.display = "flex";
-            if (lightBtn) lightBtn.style.display = "none";
-            localStorage.setItem("theme", "dark");
-        }
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
     }
 
     logoes.forEach(logo => {
         logo.addEventListener('mouseenter', () => {
-            const currentTheme = localStorage.getItem("theme");
-            if (currentTheme === "light") {
-                logo.style.backgroundColor = "#f1f5f993";
-                logo.style.color = "#020817";
-            } else {
-                logo.style.backgroundColor = "rgba(255, 255, 255, 0.1)"; // или ваш цвет для темной темы
-            }
+            const isLight = localStorage.getItem('theme') === 'light';
+            logo.style.backgroundColor = isLight ? '#f1f5f993' : 'rgba(255, 255, 255, 0.1)';
         });
 
         logo.addEventListener('mouseleave', () => {
-            logo.style.backgroundColor = "";
-            logo.style.color = "";
+            logo.style.backgroundColor = '';
         });
     });
 
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light") {
-        applyTheme(true);
-    } else {
-        applyTheme(false);
-    }
-
     function toggleTheme() {
-        const currentTheme = localStorage.getItem("theme");
-        if (currentTheme === "light") {
-            applyTheme(false);
-        } else {
-            applyTheme(true);
-        }
+        applyTheme(localStorage.getItem('theme') !== 'light');
     }
 
-    if (darkBtn) {
-        darkBtn.addEventListener("click", toggleTheme);
-    }
+    if (darkBtn) darkBtn.addEventListener('click', toggleTheme);
+    if (lightBtn) lightBtn.addEventListener('click', toggleTheme);
 
-    if (lightBtn) {
-        lightBtn.addEventListener("click", toggleTheme);
-    }
+    applyTheme(localStorage.getItem('theme') === 'light');
 }
-
-

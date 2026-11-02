@@ -15,6 +15,14 @@ body {
             justify-content: center;
             gap: 20px;
 
+            @media (max-width:640px) {
+                display: flex;
+                flex-direction: column;
+                input{
+                    max-width: 80%;
+                }
+            }
+
             .search_input {
                 display: flex;
                 align-items: center;
@@ -23,7 +31,7 @@ body {
                 padding: 7px 12px;
 
                 input {
-                    width: 1280px; //Hata width bilan. Tug'rla olmadim
+                    width: 1280px; //Hato width bilan. Tug'rla olmadim
                     padding: 8px 12px;
                     border: none;
                     outline: none;
