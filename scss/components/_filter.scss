@@ -1,0 +1,25 @@
+.filter_panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 15px 0;
+}
+
+.filter_panel[hidden] {
+    display: none;
+}
+
+.filter_panel select,
+.filter_panel input,
+.filter_panel button {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    background: transparent;
+    color: inherit;
+}
+
+.filter_panel button {
+    cursor: pointer;
+}

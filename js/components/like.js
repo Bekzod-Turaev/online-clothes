@@ -6,6 +6,8 @@ const noProductsSection = document.getElementById('no-products-section');
 
 const MAX_WORDS = 20;
 
+let allProducts = [];
+
 function truncateWords(text, maxWords) {
     const words = text.trim().split(/\s+/);
 
@@ -31,7 +33,9 @@ async function fetchProducts() {
             return;
         }
 
-        renderProducts(products);
+        allProducts = products;
+        fillCategories(allProducts);
+        renderProducts(allProducts);
     } catch (error) {
         console.error('API не работает:', error);
         showEmptyState();
@@ -93,6 +97,99 @@ function renderProducts(products) {
     });
 }
 
+const searchInput = document.querySelector('.search_input input');
+const filterBtn = document.querySelector('.filter button');
+const searchBlock = document.querySelector('.search');
+
+let categorySelect;
+let minInput;
+let maxInput;
+let sortSelect;
+
+function initFilters() {
+    if (!searchInput || !filterBtn || !searchBlock) return;
+
+    const panel = document.createElement('div');
+    panel.className = 'filter_panel';
+    panel.hidden = true;
+    panel.innerHTML = `
+        <select id="filter-category"><option value="">All categories</option></select>
+        <input type="number" id="filter-min" placeholder="Min price" min="0">
+        <input type="number" id="filter-max" placeholder="Max price" min="0">
+        <select id="filter-sort">
+            <option value="">Sort by</option>
+            <option value="asc">Price: low to high</option>
+            <option value="desc">Price: high to low</option>
+        </select>
+        <button type="button" id="filter-reset">Reset</button>
+    `;
+    searchBlock.after(panel);
+
+    categorySelect = panel.querySelector('#filter-category');
+    minInput = panel.querySelector('#filter-min');
+    maxInput = panel.querySelector('#filter-max');
+    sortSelect = panel.querySelector('#filter-sort');
+    const resetBtn = panel.querySelector('#filter-reset');
+
+    filterBtn.addEventListener('click', () => {
+        panel.hidden = !panel.hidden;
+    });
+
+    searchInput.addEventListener('input', applyFilters);
+    categorySelect.addEventListener('change', applyFilters);
+    minInput.addEventListener('input', applyFilters);
+    maxInput.addEventListener('input', applyFilters);
+    sortSelect.addEventListener('change', applyFilters);
+
+    resetBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        categorySelect.value = '';
+        minInput.value = '';
+        maxInput.value = '';
+        sortSelect.value = '';
+        applyFilters();
+    });
+}
+
+function fillCategories(products) {
+    if (!categorySelect) return;
+
+    const categories = [...new Set(products.map(p => p.category))];
+
+    categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category;
+        categorySelect.appendChild(option);
+    });
+}
+
+function applyFilters() {
+    const query = searchInput.value.trim().toLowerCase();
+    const category = categorySelect.value;
+    const min = minInput.value === '' ? 0 : Number(minInput.value);
+    const max = maxInput.value === '' ? Infinity : Number(maxInput.value);
+    const sort = sortSelect.value;
+
+    const result = allProducts.filter(p => {
+        const matchTitle = p.title.toLowerCase().includes(query);
+        const matchCategory = !category || p.category === category;
+        const matchPrice = p.price >= min && p.price <= max;
+        return matchTitle && matchCategory && matchPrice;
+    });
+
+    if (sort === 'asc') result.sort((a, b) => a.price - b.price);
+    if (sort === 'desc') result.sort((a, b) => b.price - a.price);
+
+    if (result.length === 0) {
+        showEmptyState();
+        return;
+    }
+
+    renderProducts(result);
+}
+
 if (productsContainer && noProductsSection) {
+    initFilters();
     fetchProducts();
 }
